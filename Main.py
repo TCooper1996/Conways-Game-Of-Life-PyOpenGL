@@ -148,13 +148,11 @@ class GLWidget(QOpenGLWidget):
             GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         self.set_color(self.gray)
         glBindVertexArray(self.cell_vao)
-        glBindBuffer(GL_ARRAY_BUFFER, self.cell_vbo)
         glDrawArrays(GL_TRIANGLES, 0, glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE))
 
         self.set_color(self.black)
         self.set_grid_buffer(self.density)
         glBindVertexArray(self.grid_vao)
-        glBindBuffer(GL_ARRAY_BUFFER, self.grid_vbo)
         glDrawArrays(GL_LINES, 0, glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE))
 
     def resizeGL(self, width, height):
