@@ -124,9 +124,8 @@ class GLWidget(QOpenGLWidget):
     def sizeHint(self):
         return QSize(self.width, self.height)
 
-
     def initializeGL(self):
-        self.setClearColor(self.white)
+        glClearColor(1, 1, 1, 1)
 
         self.grid_vao = glGenVertexArrays(1)
         self.cell_vao = glGenVertexArrays(1)
@@ -153,10 +152,10 @@ class GLWidget(QOpenGLWidget):
         glDrawArrays(GL_TRIANGLES, 0, glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE))
 
         self.set_color(self.black)
+        self.set_grid_buffer(self.density)
         glBindVertexArray(self.grid_vao)
         glBindBuffer(GL_ARRAY_BUFFER, self.grid_vbo)
         glDrawArrays(GL_LINES, 0, glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE))
-
 
     def resizeGL(self, width, height):
         self.width = width
@@ -225,7 +224,6 @@ class GLWidget(QOpenGLWidget):
         self.update_buffer_data()
 
     def update_buffer_data(self):
-
         array = []
         for cell in self.squares:
             row = cell[1]
@@ -258,7 +256,7 @@ class GLWidget(QOpenGLWidget):
         data = glGetBufferSubData(GL_ARRAY_BUFFER, 0, size, None)
         data = np.array(data)
         print(data.view(np.float32))
-        print("Data contains %d floats, or %d squares" % (size, size/(12*4)))
+        print("Data contains %d bytes, or %d floats, or %d squares" % (size, size/4, size/(12*4)))
 
     @staticmethod
     def set_color(c):
