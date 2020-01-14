@@ -6,6 +6,7 @@ PyOpenGL is the OpenGL binding, and PyQt5 is the QT binding.
 
 This application requires numpy, pyOpenGL and PyQt5
 To run it:
+
 clone it
 ```
 git clone https://github.com/TCooper1996/Conways-Game-Of-Life-PyOpenGL/
